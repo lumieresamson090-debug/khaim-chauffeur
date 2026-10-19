@@ -1,1 +1,34 @@
+name: Build APK Chauffeur
 
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.5'
+          channel: 'stable'
+
+      - name: Install Flet
+        run: |
+          pip install flet==0.28.3
+
+      - name: Build APK
+        run: |
+          flet build apk --verbose
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: K-HAIM-CHAUFFEUR-APK
+          path: build/apk
