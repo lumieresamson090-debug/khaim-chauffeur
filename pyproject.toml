@@ -1,23 +1,25 @@
-
 [project]
 name = "khaim-chauffeur"
-version = "1.0.0"
-description = "K-HAIM Chauffeur - Partenaire"
-dependencies = ["flet==0.28.3", "requests"]
+version = "1.0.1"
+description = "K-HAIM Chauffeur - Partage de position GPS"
+dependencies = [
+    "flet==0.28.3",
+    "flet-geolocator==0.1.0",
+    "requests",
+]
 requires-python = ">=3.11"
 
 [tool.flet]
 app_name = "K-HAIM Chauffeur"
 org_name = "com.khaim"
-package_name = "com.khaim.chauffeur"
 product_name = "K-HAIM Chauffeur"
-assets_dir = "src/assets"
-
-[tool.flet.app]
-module = "main"
-path = "src"
+permissions = ["location"]
 
 [tool.flet.android.permission]
 "android.permission.INTERNET" = true
 "android.permission.ACCESS_FINE_LOCATION" = true
 "android.permission.ACCESS_COARSE_LOCATION" = true
+
+[tool.flet.app]
+module = "main"
+path = "src"
