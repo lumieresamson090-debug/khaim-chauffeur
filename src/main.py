@@ -7,6 +7,11 @@ from datetime import datetime
 import flet as ft
 import requests
 
+try:
+    import flet_geolocator as ftg   # extension GPS : à déclarer dans pyproject.toml
+except ImportError:
+    ftg = None
+
 # ==========================================
 # CONFIGURATION
 # ==========================================
@@ -82,7 +87,7 @@ def main_app(page: ft.Page):
     verrou_gps = threading.Lock()
 
     try:
-        geo = ft.Geolocator()
+        geo = ftg.Geolocator() if ftg else ft.Geolocator()
         page.overlay.append(geo)
     except Exception:
         geo = None
@@ -601,4 +606,3 @@ def main(page: ft.Page):
 
 
 ft.app(target=main)
-
